@@ -11,6 +11,11 @@
     <%@ include file="part/head.jsp" %>
     <meta charset="ISO-8859-1">
     <title>Edit Task</title>
+    <style>
+        .error{
+            color : red;
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -18,21 +23,25 @@
 </header>
 <div class="container">
     <h1 align="center"> Edit - ${task.title} </h1>
-    <form action="${contextPath}/updateTask" name="user" method="POST">
+    <form:form action="${contextPath}/updateTask"  method="POST" modelAttribute="task" >
         <input type="hidden" value="${task.id}" id="id" name="id">
         <div class="form-group">
             <label for="title" class="mb-2 mr-sm-2">Title:</label>
-            <input type="text" class="form-control" id="title" placeholder="Title" name="title" value="${task.title}">
+            <form:input type="text" class="form-control" placeholder="Title" path="title" value="${task.title}"/>
+            <form:errors path="title" cssClass="error"/>
         </div>
         <div class="form-group">
             <label for="explanation" class="mb-2 mr-sm-2">Explanation:</label>
-            <input type="text" class="form-control" id="explanation" placeholder="Explanation" name="explanation"
-                   value="${task.explanation}">
+            <form:input type="text" class="form-control" placeholder="Explanation" path="explanation"
+                   value="${task.explanation}"/>
+            <form:errors path="explanation" cssClass="error"/>
         </div>
         <div class="form-group">
             <label for="dueDate" class="mb-2 mr-sm-2">Due date:</label>
-            <input type="date" class="form-control" id="dueDate" placeholder="Due date" name="dueDate"
-                   value="${task.dueDate}">
+            <form:input type="date" class="form-control" placeholder="Due date" path="dueDate"
+                   value="${task.dueDate}"/>
+            <form:errors path="dueDate" cssClass="error"/>
+
         </div>
 
         <div class="form-group">
@@ -47,7 +56,7 @@
         <br/>
         <button type="submit" class="btn btn-primary mb-2">Submit</button>
 
-    </form>
+    </form:form>
 </div>
 </body>
 </html>

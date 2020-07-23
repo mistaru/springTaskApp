@@ -6,11 +6,13 @@ import kg.demir.taskapp.repository.TaskRepository;
 import kg.demir.taskapp.service.ITaskService;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
 @Service
+@Transactional
 public class TaskServiceImpl implements ITaskService {
 
     private final TaskRepository taskRepository;
@@ -28,6 +30,7 @@ public class TaskServiceImpl implements ITaskService {
 
     @Override
     public Task update(Task task) {
+        task.setStartDate(LocalDate.now());
         return taskRepository.save(task);
     }
 

@@ -18,19 +18,20 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @NotEmpty(message = "Заголовок не должен быть пустым!")
-    @Min(value = 3, message = "Заголок не должен быть длинее 20 символов")
+    @NotBlank(message = "The field must not be empty")
+    @Size(min = 3, message = "The length of the title must be longer than 3 characters")
     private String title;
 
-    @Max(value = 90, message = "Описание не должно быть длинее 90 символов")
+    @NotBlank(message = "The field must not be empty")
+    @Size(max = 50, message = "The field must not exceed 50 characters in length")
     private String explanation;
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate startDate;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @NotNull(message = "Дата окончания не должна быть пустым")
-    @Future(message = "Дата должна быть указана в будщем времени")
+    @NotNull(message = "The date must not be empty")
+    @Future(message = "Choose the future time")
     private LocalDate dueDate;
 
     @Enumerated(EnumType.STRING)

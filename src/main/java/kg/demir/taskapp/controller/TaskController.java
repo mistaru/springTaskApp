@@ -1,19 +1,19 @@
 package kg.demir.taskapp.controller;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
 import kg.demir.taskapp.entity.Task;
 import kg.demir.taskapp.service.ITaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 @Controller
 public class TaskController {
@@ -31,17 +31,14 @@ public class TaskController {
     }
 
     @RequestMapping(value = "newTask", method = RequestMethod.GET)
-    public String newTask (Model model) {
-
-        model.addAttribute("task", new Task());
+    public String newTask(Task task) {
         return "task";
     }
 
     @RequestMapping(value = "/saveTask", method = RequestMethod.POST)
-    public String saveTask(@ModelAttribute("task")@Valid Task task, BindingResult bindingResult, Model model) {
+    public String saveTask(@Valid @ModelAttribute("task") Task task, Errors bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("tasks", taskService.findAll());
             return "task";
         }
         taskService.save(task);
@@ -54,6 +51,7 @@ public class TaskController {
         if (id != null) {
             taskService.deleteById(id);
         }
+
         return "redirect:/";
     }
 
@@ -65,11 +63,13 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/updateTask", method = RequestMethod.POST)
-    public String updateTask(@Valid Task task) {
+    public String updateTask(@ModelAttribute("task") @Valid Task task, BindingResult bindingResult) {
 
-        if (task != null) {
-            taskService.update(task);
+        if (bindingResult.hasErrors()) {
+            return "editTask";
         }
+
+        taskService.update(task);
         return "redirect:/";
     }
 }

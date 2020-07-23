@@ -17,7 +17,6 @@
             color : red;
         }
     </style>
-
 </head>
 <body>
 <header>
@@ -30,18 +29,19 @@
     <form:form action="/saveTask"  method="POST" modelAttribute="task">
         <div class="form-group">
             <label for="title">Title:</label>
-            <form:input placeholder="Title" path="title"/>
+            <form:input placeholder="Title" class="form-control" path="title"/>
             <form:errors path="title" cssClass="error"/>
         </div>
 
         <div class="form-group">
             <label for="explanation">Explanation:</label>
-            <form:input  placeholder="Explanation" path="explanation"/>
+            <form:input  placeholder="Explanation" class="form-control" path="explanation"/>
             <form:errors path="explanation" cssClass="error"/>
         </div>
+
         <div class="form-group">
             <label for="dueDate">Due date:</label>
-            <form:input type="date" placeholder="Due date" path="dueDate"/>
+            <form:input type="date" placeholder="Due date" class="form-control" path="dueDate"/>
             <form:errors path="dueDate" cssClass="error"/>
         </div>
         <br/>
