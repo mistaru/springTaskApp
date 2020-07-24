@@ -54,7 +54,6 @@ public class TaskController {
         if (id != null) {
             taskService.deleteById(id);
         }
-
         return "redirect:/";
     }
 
@@ -73,7 +72,6 @@ public class TaskController {
         if (bindingResult.hasErrors()) {
             return "editTask";
         }
-
         taskService.update(task);
         return "redirect:/";
     }
