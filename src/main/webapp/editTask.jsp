@@ -12,8 +12,8 @@
     <meta charset="ISO-8859-1">
     <title>Edit Task</title>
     <style>
-        .error{
-            color : red;
+        .error {
+            color: red;
         }
     </style>
 </head>
@@ -23,7 +23,7 @@
 </header>
 <div class="container">
     <h1 align="center"> Edit - ${task.title} </h1>
-    <form:form action="${contextPath}/updateTask"  method="POST" modelAttribute="task" >
+    <form:form action="${contextPath}/updateTask" method="POST" modelAttribute="task">
         <input type="hidden" value="${task.id}" id="id" name="id">
         <div class="form-group">
             <label for="title" class="mb-2 mr-sm-2">Title:</label>
@@ -33,15 +33,14 @@
         <div class="form-group">
             <label for="explanation" class="mb-2 mr-sm-2">Explanation:</label>
             <form:input type="text" class="form-control" placeholder="Explanation" path="explanation"
-                   value="${task.explanation}"/>
+                        value="${task.explanation}"/>
             <form:errors path="explanation" cssClass="error"/>
         </div>
         <div class="form-group">
             <label for="dueDate" class="mb-2 mr-sm-2">Due date:</label>
             <form:input type="date" class="form-control" placeholder="Due date" path="dueDate"
-                   value="${task.dueDate}"/>
+                        value="${task.dueDate}"/>
             <form:errors path="dueDate" cssClass="error"/>
-
         </div>
 
         <div class="form-group">
@@ -55,7 +54,6 @@
 
         <br/>
         <button type="submit" class="btn btn-primary mb-2">Submit</button>
-
     </form:form>
 </div>
 </body>
