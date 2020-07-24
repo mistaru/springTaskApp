@@ -1,5 +1,6 @@
 package kg.demir.taskapp.entity;
 
+import io.swagger.annotations.ApiModel;
 import kg.demir.taskapp.enums.Status;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "task")
+@ApiModel("Task basic information")
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

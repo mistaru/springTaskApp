@@ -1,21 +1,21 @@
 package kg.demir.taskapp.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import kg.demir.taskapp.entity.Task;
 import kg.demir.taskapp.service.ITaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Controller
+@Api(value = "Task resources", description = "crud operations")
 public class TaskController {
 
     private final ITaskService taskService;
@@ -25,6 +25,7 @@ public class TaskController {
     }
 
     @RequestMapping("/")
+    @ApiOperation(value = "show all task", response = String.class)
     public String index(Model model) {
         model.addAttribute("listTask", taskService.findAll());
         return "index";
@@ -36,6 +37,7 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/saveTask", method = RequestMethod.POST)
+    @ApiOperation(value = "create new task", response = String.class)
     public String saveTask(@Valid @ModelAttribute("task") Task task, Errors bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -46,6 +48,7 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/deleteTask/{id}", method = RequestMethod.GET)
+    @ApiOperation(value = "delete task by id", response = String.class)
     public String deleteTask(@PathVariable("id") Long id) {
 
         if (id != null) {
@@ -56,6 +59,7 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/editTask/{id}", method = RequestMethod.GET)
+    @ApiOperation(value = "show task by id", response = String.class)
     public ModelAndView editTask(@PathVariable("id") Long id) {
 
         return new ModelAndView("editTask")
@@ -63,6 +67,7 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/updateTask", method = RequestMethod.POST)
+    @ApiOperation(value = "edit task by id", response = String.class)
     public String updateTask(@ModelAttribute("task") @Valid Task task, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
